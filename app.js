@@ -54,10 +54,8 @@ console.log(calc(15, 0, '/'));
 console.log(calc(10, 2, '-'));
 
 function sum(a) {
-    return function(b,c){
-    return (a * b) ** c;
+    return function (b, c) {
+        return (a * b) ** c;
     };
 }
-console.log(sum(5)(10,3));
-
-
+console.log(sum(5)(10, 3));
