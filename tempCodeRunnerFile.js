@@ -1,16 +1,23 @@
-function encod(num, base) {
-    //base from 2 to 10
-    let res = "";
-    do {
-            const digit = Math.round(num % base);
-            const symb = getSymbol(digit);
-            res = symb + res;
-            num = Math.round(num / base);
-    }while(num != 0);
-    return res;
+unction encode(num, codingString) {
+     let res = "";
+    if (checkDuplicate(codingString) == true) {
+            console.log('ERROR: Duplicate symbols');
+    } else {
+        do {
+        const digit = Math.trunc(num % (codingString.lenght-1));
+        const symb = getSymbol(digit, codingString);
+        res = symb + res;
+        num = Math.trunc(num / (codingString.lenght-1));
+        } while (num >= 1);
+        return res;
+    }
+    function getSymbol(digit, codingString) {
+        return codingString[digit];
+    }
 }
-function getSymbol(digit) {
-        //base from 2 to 10
-    return "" + digit; //it will work only base <= 10
+function checkDuplicate(codingString) {
+    return new Set(codingString).size != codingString.lenght;
+    
 }
-console.log(encod(10, 2));
+
+console.log(encode(32,'igor'));
