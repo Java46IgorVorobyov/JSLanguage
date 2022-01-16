@@ -1,61 +1,50 @@
-// console.log('Hello World');
-//Output for var: 3 3 3;
-// for (var i = 0; i < 3; i++) {
-//     setTimeout(function() {
-//         console.log(i);
-//     });
-// }
-//Output fot let: 0 1 2;
-// for (let i = 0; i < 3; i++) {
-//     setTimeout(function() {
-//         console.log(i);
-//     });
-// }
+const str1 = "abc";
+const str2 = "abc";
+console.log(`str1 == str2 is ${str1 == str2}`);
+console.log(`"abc" < "s" is ${str1 < "s"}`);
+console.log(`"123" > 23 is ${"123" > 23}`);
+console.log(`"123" > "23" is ${"123" > "23"}`);
+//if logical expression contains both string and number, JS will comvrt string to number
+//if string doesn't contain a number a result of conversion will be NaN
+//in any logical expression if there is NaN, then the result will be false
+console.log(`"abc" > 23 is ${"abc" > 23}`);
+console.log(`"abc" < 23 is ${"abc" < 23}`);
+console.log(`"abc" != 23 is ${!("abc" == 23)}`);
 
-// const fun = function(a, b) {
-//     return a + b;
-// };
+function stringProcessing(str){
+    const strP = "" + str;
+    console.log(`${str}[4] is ${str}[4]`);
+    console.log(`length of ${str} is ${strP.length}`);
+    console.log(`${str} includes "abc" is ${strP.includes("abc")}`);
+    console.log(`substring of ${str} beginning from index 2 to index 5 is ${strP.substring(2, 5)}`);
+    console.log(`index of substring "ll" in the ${str} is ${strP.indexOf("ll")}; last index of substring "ll" in the ${str} is ${strP.lastIndexOf("ll")}`);
 
-// let a = 5;
-// console.log(a ** 2);
-// console.log(fun(10, 20));
-// console.log(a(10, 20)); error
-// console.log(fun ** 2); NaN
-// console.log('12' + 12, '"12" + 12');//JS defines that operator + exists for strings, that's why number 12 will be converted to string
-// console.log('12' - 12);//JS defines that operator - doesn't exist for string, that's why string '12' will be convrted to number
-// console.log('ab' - 12);//....JS  will try convert 'ab' to number; as a result of this there will be value NaN.
-//sometimes there is a need to explicit conversion string to number
-//'+' unary is the simples way for the explicit conversion a string to a number 
-// console.log(`+"12" + 12 = ${+"12" + 12}`);
-
-//HomeWork #definition
-
-//1. using only two letters 'a', 's' print out word ananas case insensitive 
-//2. write function calculate that can perform any arithmetic operation on two numbers (*, /, +, -)
-//3. write any example for running the following expression fun(5)(10, 3)
-
-console.log('a' + ('a' - 's') + 'a' + 's');
-
-const calc = (num1, num2, operator) => {
-    switch (operator) {
-        case '+':
-            return num1 + num2;
-        case '-':
-            return num1 - num2;
-        case '/':
-            return num1 / num2;
-        case '*':
-            return num1 * num2;
-    }
-};
-console.log(calc(2, 2, '+'));
-console.log(calc(5, 5, '*'));
-console.log(calc(15, 0, '/'));
-console.log(calc(10, 2, '-'));
-
-function sum(a) {
-    return function (b, c) {
-        return (a * b) ** c;
-    };
 }
-console.log(sum(5)(10, 3));
+stringProcessing("abcd*imn*ll(oo&&ttll)");
+// HW 11 definition
+// сделать 123 в виде азбукиморзе
+// function encod(num, base) {
+//     //base from 2 to 10
+//     let res = "";
+//     do {
+//             const digit = Math.trunc(num % base);
+//             const symb = getSymbol(digit);
+//             res = symb + res;
+//             num = Math.trunc(num / base);
+//     }while(num >= 1);
+//     return res;
+// }
+// function getSymbol(digit) {
+//         //base from 2 to 10
+//     return "" + digit; //it will work only base <= 10
+// }
+console.log(encod(10, 2));
+
+//write function
+function encode(num, codingString) {
+    //codingString - any string with no repeated symbols
+    //you should validate codingString doesn't contain repeated symbols
+    //base = length of codingString
+    //algorithm the same as specified above
+    //getSymbol(digit, codingString) using  operator []
+}
