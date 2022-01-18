@@ -1,23 +1,15 @@
-unction encode(num, codingString) {
-     let res = "";
-    if (checkDuplicate(codingString) == true) {
-            console.log('ERROR: Duplicate symbols');
-    } else {
-        do {
-        const digit = Math.trunc(num % (codingString.lenght-1));
-        const symb = getSymbol(digit, codingString);
-        res = symb + res;
-        num = Math.trunc(num / (codingString.lenght-1));
-        } while (num >= 1);
-        return res;
+const matrix1 = [[1, 2], [3, 4], [5, 6]];
+function matrixTransp(matrix) {
+    const rows = matrix.length, cols = matrix[0].length;
+  const grid = [];
+  for (let j = 0; j < cols; j++) {
+    grid[j] = Array(rows);
+  }
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      grid[j][i] = matrix[i][j];
     }
-    function getSymbol(digit, codingString) {
-        return codingString[digit];
-    }
+  }
+  console.log(grid);
 }
-function checkDuplicate(codingString) {
-    return new Set(codingString).size != codingString.lenght;
-    
-}
-
-console.log(encode(32,'igor'));
+matrixTransp(matrix1);
