@@ -1,42 +1,40 @@
-const ar = [-10, 50, -12, 80, 40];
-ar.push(70);
-// str - "-10#50#-12#80#40#70#"
-//*********solution based on substring */
-// let str = '';
-// ar.forEach(function(n){
-//     str += n + '#';
-// });
-// //str = str.substring(0, str.length-1);
-//********solution base on forEach from second number */
-// const ar1 = ar.slice(1);
-// let str = '' + ar[0];
-// ar1.forEach(n => str += '#' + n);
-// console.log(str);
+// forEach
 
-//***printing out sequense number of element, element, length of array */
-//1 of 5 - -10;
+let arr = [10, 11, 12, 13, 14, 15, 16, 17, 18];
 
-ar.forEach((n, i, a) => console.log(`${i + 1} of ${a.length} - ${n}`));
+Array.prototype.forEach2 = function (callback) {
+    let arr = this;
+    for (let i = 0; i < arr.length; i++) {
+        callback(arr[i], i, arr);
+    }
+};
 
-//Home Work 13 task1 definition
-//write function myForEach(array, callback-function);
-//array - being iteration array
-//callback-function - function that will be called for each element of array.
-//callback-function should take three arguments: 
-//1. current element; 2. current index; 3. being iterated array
-//example of standart forEach: ar1.forEach(n => str += '#' + n);
-//example of my forEach: myForEach(array, n => str += '#' + n);
+arr.forEach2((item, index, array) => {
+    console.log({item, index});
+    //console.log({array});
+});
 
-//************************************* */
-//method "map"
-//use case of applying method map: you want to create new array with elements that ar received as result of some convertion
-//example you want to get new array with elements that are multiplication on 2 of each source element
-const ar2 = ar.map(n => n * 2);
-console.log(ar2);
-const ar3 = ar.map((n, i, a) => `<li>${i + 1} of ${a.length} - ${n}</li>`);
-console.log(ar3);
+//Map
 
-//task 2
-//write method myMap for the same functiomality as standart method map
-//function myMap(array, callback-function)
-//myMap will apply your method myForEach
+let array2 = [4, 6, 8, 9, 12, 53, -17, 2, 5, 7, 31, 97, -1, 17];
+
+Array.prototype.map2 = function (callback, thisArg) {
+  let context = this;
+  let O = Object(this);
+
+  if (arguments.length > 1) {
+    context = thisArg;
+  }
+  let len = O.length;
+  let newArray = [];
+  let i = 0;
+
+  while (i < len) {
+    if (i in O) {
+      newArray[i] = callback.call(context, this[i], i, O);
+    }
+     i++;
+  }
+  return newArray;
+};
+console.log(array2.map2((item) => item * 2));
