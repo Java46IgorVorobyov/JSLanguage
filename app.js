@@ -14,6 +14,13 @@ arr.forEach2((item, index, array) => {
     //console.log({array});
 });
 
+ let str = '';
+arr.forEach2(function(a) {
+         str += a + '#';
+ });
+str = str.substring(0, str.length - 1);
+console.log(str);
+
 //Map
 
 let array2 = [4, 6, 8, 9, 12, 53, -17, 2, 5, 7, 31, 97, -1, 17];
@@ -38,3 +45,4 @@ Array.prototype.map2 = function (callback, thisArg) {
   return newArray;
 };
 console.log(array2.map2((item) => item * 2));
+
