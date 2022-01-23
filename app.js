@@ -9,17 +9,10 @@ Array.prototype.forEach2 = function (callback) {
     }
 };
 
-arr.forEach2((item, index, array) => {
-    console.log({item, index});
-    //console.log({array});
-});
-
- let str = '';
-arr.forEach2(function(a) {
-         str += a + '#';
- });
-str = str.substring(0, str.length - 1);
-console.log(str);
+ const arr1 = arr.slice(1);
+ let str =  '' + arr[0];
+ arr1.forEach2(a => str += '#' + a);
+ console.log(str);
 
 //Map
 
