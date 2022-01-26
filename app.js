@@ -49,6 +49,17 @@ const persons = [
 ];
 //console.log(persons);
 
+let getPersonCity1 = person=> person.address.city === 'Rehovot';
+const res1 = persons.filter(getPersonCity1);
+console.log(res1);
+
+let movePersonsNoCityAtBeginning = person=> person.address.city !== 'Tel-Aviv';
+const res2 = persons.filter(movePersonsNoCityAtBeginning);
+console.log(res2);
+
+
+
+
 // let getPersonCity = persons.filter(function (person, city){
 //     return person.address.city === 'Rehovot';
 // });
@@ -58,14 +69,5 @@ const persons = [
 //     return person.address.city != 'Rehovot';
 // });
 // console.log(getPersonCity);
-
-let getPersonCity1 = person=> person.address.city === 'Rehovot';
-const res1 = persons.filter(getPersonCity1);
-console.log(res1);
-
-let movePersonsNoCityAtBeginning = person=> person.address.city !== 'Tel-Aviv';
-const res2 = persons.filter(movePersonsNoCityAtBeginning);
-console.log(res2);
-
  
  
