@@ -1,53 +1,71 @@
-const person1 = {
-    id: 123,
-    name: 'Moshe',
-    address: {
-        city: 'Lod',
-        street: 'Sokolov'
+//filter 
+
+const arr = [23, 23, 12, 75, 40, 20, 2, 3, 8];
+
+Array.prototype.myFilter = function (callback) {
+   let arr1 = [];
+   for (let i = 0; i < this.length; i++) {
+       if (callback.call(this, this[i])) {
+           arr1.push(this[i]);
+       }
+   }
+   return arr1;
+  };
+
+  const filter = arr.myFilter((a)=> a % 2 === 0);
+  console.log(filter);
+
+  //reduce 
+
+  Array.prototype.myReduce = function (callback, initialResult) {
+    let a = initialResult;
+    for (let i = 0; i < this.length; i++) {
+        if (a !== undefined) {
+            a = callback.call(undefined, a, this[i], i, this);
+        } else {
+            a = this[i];
+        }
     }
-};
-const person2 = {
-    id: 123,
-    name: 'Moshe',
-    address: {
-        city: 'Lod',
-        street: 'Sokolov'
-    }
-};
-const person3 = person1;
-console.log(`'123' == 123 is ${'123' == 123}`);
-console.log(`'123' === 123 is ${'123' === 123}`);
-console.log(`person1 === person3 is ${person1 === person3}`);
-console.log(`person1 === person2 is ${person1 === person2}`);
-console.log(`JSON.stringify(person1) === JSON.stringify(person2) is ${JSON.stringify(person1) === JSON.stringify(person2)}`);
-console.log(JSON.stringify(person1));
-console.log(person1.toString());
-console.log(`name of person1 is ${person1.name}`);
-console.log(`person1 live in city ${person1.address.city}`);
-Object.keys(person1).forEach(k=> console.log(k)); //array of the object keys
-Object.values(person1).forEach(v=> console.log(v)); //array of the object values 
-Object.entries(person1).forEach(b=> console.log(b)); //array of arrays - [key,value]
-console.log(Object.entries(person1));
+    return a;
+  };
+  let res = arr.myReduce((total, num)=> {
+      return total + num;
+  });
+  console.log(res);
+
+  //************************************ */
 
 function createAddress(city, street) {
-    // {city: city, street: street} <=> {city, street}
     return {city, street};
-
 }
 function createPerson(id, name, address) {
-
     return {id, name, address};
-
-} 
+}
 const persons = [
-
-    createPerson(123, 'Vasy', createAddress('Rehovot', 'Parshani')),
-    createPerson(124, 'Olya', createAddress('Rehovot', 'Pr. Plaut')),
-    createPerson(125, 'Tolya', createAddress('Tel-Aviv', 'Dizengoff'))
-
+    createPerson(123, "Vasya", createAddress("Rehovot","Parshani")),
+    createPerson(124, "Olya", createAddress("Rehovot","Pr. Plaut")),
+    createPerson(125, "Tolya", createAddress("Tel-Aviv","Dizengoff")),
+    createPerson(126, "Sara", createAddress('Lod', 'Sokolov'))
 ];
-//Используя методы работы с массивами найти всех пользователей которые живут в Реховоте.
-//apply methods of arrays you should find the persons living in Rehovot and display them out
+//console.log(persons);
 
-//Task 4
-//TODO move the persons that don't live in Rehovot at beginning of the array persons
+// let getPersonCity = persons.filter(function (person, city){
+//     return person.address.city === 'Rehovot';
+// });
+// //console.log(getPersonCity);
+
+// let movePersonsNoCityAtBeginning = persons.filter(function (person, city){
+//     return person.address.city != 'Rehovot';
+// });
+// console.log(getPersonCity);
+
+let getPersonCity1 = person=> person.address.city === 'Rehovot';
+const res1 = persons.filter(getPersonCity1);
+console.log(res1);
+
+let movePersonsNoCityAtBeginning = person=> person.address.city !== 'Tel-Aviv';
+const res2 = persons.filter(movePersonsNoCityAtBeginning);
+console.log(res2);
+
+ 
+ 
