@@ -1,40 +1,3 @@
-//filter 
-
-const arr = [23, 23, 12, 75, 40, 20, 2, 3, 8];
-
-Array.prototype.myFilter = function (callback) {
-   let arr1 = [];
-   for (let i = 0; i < this.length; i++) {
-       if (callback.call(this, this[i])) {
-           arr1.push(this[i]);
-       }
-   }
-   return arr1;
-  };
-
-  const filter = arr.myFilter((a)=> a % 2 === 0);
-  console.log(filter);
-
-  //reduce 
-
-  Array.prototype.myReduce = function (callback, initialResult) {
-    let a = initialResult;
-    for (let i = 0; i < this.length; i++) {
-        if (a !== undefined) {
-            a = callback.call(undefined, a, this[i], i, this);
-        } else {
-            a = this[i];
-        }
-    }
-    return a;
-  };
-  let res = arr.myReduce((total, num)=> {
-      return total + num;
-  });
-  console.log(res);
-
-  //************************************ */
-
 function createAddress(city, street) {
     return {city, street};
 }
@@ -49,25 +12,13 @@ const persons = [
 ];
 //console.log(persons);
 
-let getPersonCity1 = person=> person.address.city === 'Rehovot';
-const res1 = persons.filter(getPersonCity1);
-console.log(res1);
 
-let movePersonsNoCityAtBeginning = person=> person.address.city !== 'Tel-Aviv';
-const res2 = persons.filter(movePersonsNoCityAtBeginning);
-console.log(res2);
+let max = persons.reduce((acc, curr) => acc.b > curr.b ? acc : curr);
+console.log(max);
 
+const result = Object.entries(persons.reduce((acc, { id }) => {
+    acc[id] = (acc[id] || 0) + 1;
+    return acc;
+}, {})).map( ([k,v]) => ({id: parseInt(k,10), count:v}));
 
-
-
-// let getPersonCity = persons.filter(function (person, city){
-//     return person.address.city === 'Rehovot';
-// });
-// //console.log(getPersonCity);
-
-// let movePersonsNoCityAtBeginning = persons.filter(function (person, city){
-//     return person.address.city != 'Rehovot';
-// });
-// console.log(getPersonCity);
- 
- 
+console.log(result);
