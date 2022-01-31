@@ -1,3 +1,5 @@
+console.log(`\nTask #1\n`);
+
 const ar = ['lmn', 'd', 'd', 'lmn', 'a', 'lmn', 'a', 'bc'];
 
 function Occurrences(array) {
@@ -20,6 +22,9 @@ Object.entries(res).sort((e1, e2) => {
 }
 
 displayOccurrences(ar);
+
+console.log(`\nTask #2\n`);
+
 
 const whoIsTheWizard = [
     {username: "John Snow", type: 'maggle'},
