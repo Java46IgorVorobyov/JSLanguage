@@ -1,46 +1,85 @@
-console.log(`\nTask #1\n`);
-
-const ar = ['lmn', 'd', 'd', 'lmn', 'a', 'lmn', 'a', 'bc'];
-
-function Occurrences(array) {
-
-const res = ar.reduce((acc, rec) => {
-    const res = {};
-    return (typeof acc[rec] !== 'undefined') ? { ...acc, [rec]: acc[rec] + 1 } : { ...acc, [rec]: 1 };
-}, {});
-return res;
+const circle = {radius: 20, square: function(){
+    return 3.14 * (this.radius ** 2);
+}, perimeter: () => 2 * 3.14 * this.radius, toString: function(){
+    return `radious of this circle is ${this.radius}`;
+}};
+console.log(`square = ${circle.square()}, perimeter = ${circle.perimeter()}`);
+//circle.square will be converted to square(circle) where circle as argument value,
+//"this" is thehidden parameter in the function
+// in any arrow function there is no "this"
+function square(circle) {
+        return 3.14 * (circle.radius ** 2);
 }
+console.log(`circle: ${circle}`);
 
-function displayOccurrences(array) {
-
-const res = Occurrences(array);
-
-Object.entries(res).sort((e1, e2) => {
-    const res = e2[1] - e1[1];
-    return res === 0 ? e1[0].localeCompare(e2[0]) :  res;
-}).forEach(e => console.log(`${e[0]} -> ${e[1]}`));
+const circle1 = {radius: 20, perimeter: function(){
+    return 2 * 3.14 * this.radius;
+}, toString: function(){
+    return `radious of this circle is ${this.radius}`;
+}};
+//circle1.square(); error because the method square is not defined inside obj circle1
+function Circle(radius) {
+        this.radius = radius;
 }
+Circle.prototype.square = function() {
+       return 3.14 * (this.radius ** 2);
+};
+Circle.prototype.perimeter = function() {
+        return 2 * 3.14 * this.radius;
+};
+Circle.prototype.toString = function() {
+    return `radius of this circle is ${this.radius}`;
+};
+const circle10 = new Circle(10);
 
-displayOccurrences(ar);
+Array.prototype.filter = function(callbackPredicate) {
+        console.log(`tel-Ran copyright`);
+        const res = [];
+        this.forEach((n, i, a)=> callbackPredicate(n, i, a) && res.push(n));
+        return res;
+};
+const ar = [1, 2, 4, 5, 100];
+ar.filter(n=> n % 2 !== 0).forEach(n=> console.log(n));
 
-console.log(`\nTask #2\n`);
 
 
-const whoIsTheWizard = [
-    {username: "John Snow", type: 'maggle'},
-    {username: "John Snow", type: 'maggle'},
-    {username: "Harry Potter", type: 'wizard'},
-    {username: "Ronald Weasley", type: 'wizard'},
-    {username: "Misha Mavashi", type: 'maggle'},
-    {username: "Severus Snape", type: 'wizard'},
-    {username: "Rubeus Hagrid", type: 'wizard'},
-    {username: "Jimmy", type: 'maggle'},
-    {username: "Justin Bieber", type: 'maggle'},
-];
 
-const result = Object.entries(whoIsTheWizard.reduce((acc, { type }) => {
-    acc[type] = (acc[type] || 0) + 1;
-    return acc;
-}, {}));
 
-console.log(result);
+
+
+
+
+
+
+//************HW 16 definition */ 
+// const d = new Deferred();
+// d.then(function(res){console.log('1 ', res); return 'a'});
+// d.then(function(res){console.log('2 ', res); return 'b'});
+// d.then(function(res){console.log('3 ', res); return 'c'});
+// d.resolve('hello');
+// Output:
+// 1 hello
+// 2 a
+// 3 b
+//Task #2
+//const myArray = new  myArray(10); 
+//myArray.get(index) - result 10;
+//write method get getting an index value and returning common value (set in constructor)
+//myArray.set(index, value); 
+//write method set that sets a given value at a given index
+//myArray.setValue(value); sets new value in all elements of myArray
+
+// Example:
+// const myArray = new MyArray(10);
+// console.log(myArray.get(100));// displayed out 10
+// myArray.set(100, 500);// sets 500 at index 100
+// console.log(myArray.get(200)); //displayed out 10
+// console.log(myArray.get(100));// displayed out 500
+// myArray.setValue(300);
+// console.log(myArray.get(100)); // displayed out 300
+// console.log(myArray.get(200)); // displayed out 300
+
+
+
+
+
