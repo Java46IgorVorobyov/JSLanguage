@@ -59,8 +59,10 @@ console.log(myArray.get(100)); //displayed out 300
 console.log(myArray.get(200)); //displayed out 300
 
 //how to get array's length 
-// const arr1 = [];
-// arr1[100000000] = 10;
+const arr1 = [];
+arr1[100000000] = 10;
+arr1.length = 0;
+console.log(arr1.length);
 // console.log(`lenght of arr1 is ${arr1.length}`);
 // arr1.length = 0;
 // console.log(arr1[100000000]);
