@@ -1,68 +1,93 @@
-console.log(`Task #1`);
-console.log(`----------------------------------`);
-function Deferred() {
-    this.callbacks = [];
-  }
-  Deferred.prototype.then = function(cb) {
-    this.callbacks.push(cb);
-  };
-  Deferred.prototype.resolve = function(val) {
-    let f = this.callbacks.shift();
-    if (f) {
-      let d = f(val);
-      if (d instanceof Deferred)  d.then((v) => this.resolve(v));
-      else this.resolve(d);
-    }
-  };
-  
-  var d = new Deferred('one');
-  d.then(function(res) {
-    console.log('1 ', res);
-    return 'a';
-  });
-  d.then(function(res) {
-    console.log('2 ', res);
-    return 'b';
-  });
-  d.then(function(res) {
-    console.log('3 ', res);
-    return 'c';
-  });
-  d.resolve('hello');
+class Person {
+        #id;
+        #name;
+        constructor(id, name) {
+                this.#id = id;
+                this.#name = name;
+        }
+        getId() {
+                return this.#id;
+        }
+        getName() {
+                return this.#name;
+        }
+        toString() {
+                return `id: ${this.#id}; name: ${this.#name};`;
+        }
+}
+const person = new Person(123, 'Moshe');
+console.log(`person is ${person}`);
 
-console.log(`Task #2`);
-console.log(`----------------------------------`);
+class Employee extends Person {
+        #salary;
+        constructor(id, name, salary) {
+                super(id, name); //call the constractor of the class Person
+                this.#salary = salary;
+        }
+        computeSalary() {
+                return this.#salary
+        }
+        toString() {
+                return super.toString() + ` salary: ${this.computeSalary()}`;
+        }
+}
+const person2 = new Employee(124, 'Sara', 5000);
+console.log(`person2 is ${person2}`);
+console.log(typeof(person2)); //just object
+console.log(person2.constructor.name); //only this way JS allow getting constructor name
+class Child extends Person {
+        #kindergarten;
+        constructor(id, name, kindergarten) {
+                super(id, name);
+                this.#kindergarten = kindergarten;
+        }
+        getKinderGarten() {
+                return this.#kindergarten;
+        }
+        toString() {
+                return `${super.toString()} kindergarten: ${this.#kindergarten}`;
+        }
+}
+const person3 = new Child(125, 'Yakob', 'Shalom')
+console.log(`person3 is ${person3}`);
 
+class WageEmployee extends Employee {
+        #hours;
+        #wage;
+        constructor(id, name, salary, hours, wage) {
+                super(id, name, salary);
+                this.#hours = hours;
+                this.#wage = wage;
+        }
+        computeSalary() {
+                return super.computeSalary() + this.#hours * this.#wage;
+        }
+}
+const person4 = new WageEmployee(126, 'Asaf', 1000, 10, 100);
+console.log(`person4 is ${person4}`);
 
- function MyArray(initialValue) {
-        this.value = initialValue;
-        this.array = [];
- } 
- MyArray.prototype.setValue = function(value) {
-        this.value = value;
-        this.array = [];
- };
- MyArray.prototype.set = function(index, value) {
-        this.array[index] = value;
-};
-MyArray.prototype.get = function(index) {
-        return this.array[index] ?? this.value;
-};
-
-const myArray = new MyArray(10);
-console.log(myArray.get(100)); // displayed out 10
-myArray.set(100, 500);//sets 500 at index 100
-console.log(myArray.get(200)); //displayed out 10
-console.log(myArray.get(100)); //displayed out 500
-myArray.setValue(300);
-console.log(myArray.get(100)); //displayed out 300
-console.log(myArray.get(200)); //displayed out 300
-
-//how to get array's length 
-const arr1 = [];
-arr1[100000000] = 10;
-arr1.length = 0;
-console.log(arr1.length);
-// console.log(`lenght of arr1 is ${arr1.length}`);
-// arr1.length = 0;
-// console.log(arr1[100000000]);
+//****HW 17 Definition */
+const persons = [
+        new Child(100, 'Olya', 'Shalom'), 
+        new Child(101, 'Serega', 'Boker'),
+        new Child(102, 'Kolya', 'Shalom'),
+        new Employee(103, 'Vasya', 1000),
+        new WageEmployee(104, 'Tolya', 1000, 10, 100)
+]
+function countOfPersonType(persons, type) {
+        const result = Object.entries(Person.reduce((acc, { type }) => {
+                acc[type] = (acc[type] || 0) + 1;
+                return acc;
+            }, {}));
+            
+            console.log(result);
+function computeSalaryBudget(persons) {
+        //return total salary of all employee objects in the given array
+        //example
+        //computeSalaryBudget(persons) --> 3000
+}
+function countChildrenGindergarten(persons, kindergarten) {
+        //return number of children in the given kindergarten
+        //example
+        //countChildrenGindergarten(persons, 'Shalom') --> 2
+}
