@@ -25,7 +25,8 @@ class Employee extends Person {
                 this.#salary = salary;
         }
         computeSalary() {
-                return this.#salary
+                console.log(`loging of parametr this`, this);
+                return this.#salary;
         }
         toString() {
                 return super.toString() + ` salary: ${this.computeSalary()}`;
@@ -66,28 +67,22 @@ class WageEmployee extends Employee {
 const person4 = new WageEmployee(126, 'Asaf', 1000, 10, 100);
 console.log(`person4 is ${person4}`);
 
-//****HW 17 Definition */
+function testOutput(fun, expected) {
+        console.log(`function: ${fun.name} : expected result: ${expected} ; actual result: ${fun()} `);
+}
+// testOutput(WageEmployee.prototype.computeSalary.bind(person4), 2000)
+
 const persons = [
-        new Child(100, 'Olya', 'Shalom'), 
+        new Child(100, 'Olya', 'Shalom'),
         new Child(101, 'Serega', 'Boker'),
         new Child(102, 'Kolya', 'Shalom'),
         new Employee(103, 'Vasya', 1000),
         new WageEmployee(104, 'Tolya', 1000, 10, 100)
 ]
-function countOfPersonType(persons, type) {
-        const result = Object.entries(Person.reduce((acc, { type }) => {
-                acc[type] = (acc[type] || 0) + 1;
-                return acc;
-            }, {}));
-            
-            console.log(result);
+
 function computeSalaryBudget(persons) {
-        //return total salary of all employee objects in the given array
-        //example
-        //computeSalaryBudget(persons) --> 3000
+        const allEmployees = persons.filter(p => !!p.computeSalary);
+        const salaryValue = allEmployees.map(p => p.computeSalary.bind(p)());
+        return salaryValue.reduce((res, cur) => res + cur);
 }
-function countChildrenGindergarten(persons, kindergarten) {
-        //return number of children in the given kindergarten
-        //example
-        //countChildrenGindergarten(persons, 'Shalom') --> 2
-}
+testOutput(computeSalaryBudget.bind(undefined, persons), 3000)
